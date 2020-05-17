@@ -1,0 +1,35 @@
+<div class="form-container">
+    
+    <form #flightForm="ngForm" >
+       <div class="form-group">
+           <label>flightNumber</label>
+
+<input type="text" class="form-control" ngModel name="flightnumber">
+</div>
+<br><br>
+<div class="form-group">
+<label>flightModel</label>
+<input type="text" class="form-control" ngModel name="flightmodel">
+</div>
+<br><br>
+<div class="form-group">
+<label>carrierName</label>
+<input type="text" class="form-control"  ngModel name="carriername">
+</div>
+<br><br>
+<div class="form-group">
+<label>seatCapacity</label>
+<input type="text" class="form-control"  ngModel name="seatcapacity">
+</div>
+<br><br>
+
+<br><br>
+<button type="update" class=" btn btn-success"  (click)=updateFlight(flightForm)>update Flight</button>
+</form>
+<div *ngIf="updatedFlight!==null">
+    <h3>Flight Updated</h3>  
+     flightnumber= {{updatedFlight.flightNumber}}
+     flightmodel={{updatedFlight.flightModel}}
+     carriername={{updatedFlight.carrierName}}
+     seatcapacity={{updatedFlight.seatCapacity}}
+    </div>

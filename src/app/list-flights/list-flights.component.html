@@ -1,0 +1,32 @@
+<h1>Listed Flights</h1>
+<table border="1">
+    <tr>
+      <th (click)="orderBy('flightNumber')" class="link">
+       flightnumber
+        
+      </th>
+      <th (click)="orderBy('flightModel')" class="link"> 
+        flightModel
+        </th>
+
+        <th (click)="orderBy('carrierName')" class="link"> 
+           carrierName
+
+            </th>
+            <th (click)="orderBy('seatCapacity')" class="link"> 
+                seatCapacity
+                </th>
+ </tr>
+ 
+
+<tr *ngFor="let flight of flights ">
+    <td>{{flight.flightNumber}}</td> 
+    <td>{{ flight.flightModel}}</td> 
+    <td>{{ flight.carrierName}}</td>
+    <td>{{ flight.seatCapacity}}</td>
+    <td>
+      <button (click)="removeFlightById( flight.flightNumber)">Remove</button>  
+    </td>   
+  </tr>
+
+ </table>

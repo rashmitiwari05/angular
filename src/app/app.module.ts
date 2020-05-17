@@ -1,18 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AddFlightComponent } from './add-flight/add-flight.component';
+//import { FlightDetailsComponent } from './flight-details/flight-details.component';
+import { UpdateFlightComponent } from './update-flight/update-flight.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FlightService } from './services/flightservice';
+import { ListFlightsComponent } from './list-flights/list-flights.component';
+import { AscendingOrder } from './pipes/ascodered';
+//import { SearchFlightComponent } from './search-flight/search-flight.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddFlightComponent,
+    UpdateFlightComponent,
+    ListFlightsComponent,
+    AscendingOrder
+   
+   
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FlightService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
