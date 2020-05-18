@@ -26,8 +26,13 @@ export class AddFlightComponent implements OnInit {
     let flightmodel=datails.flightmodel;
     let carriername=datails.carriername;
     let seatcapacity=datails.seatcapacity;
-    let flight=new Flight(flightnumber,flightmodel,carriername,seatcapacity);
-    let result:Observable<Flight>=this.service.addFlight(flight); // adding to the store
+    this.addedFlight=new Flight();
+    this.addedFlight.flightNumber=flightnumber;
+    this.addedFlight.flightModel=flightmodel;
+    this.addedFlight.carrierName=carriername;
+    this.addedFlight.seatCapacity=seatcapacity;
+    //let flight=new Flight(flightnumber,flightmodel,carriername,seatcapacity);
+    let result:Observable<Flight>=this.service.addFlight(this.addedFlight); // adding to the store
     result.subscribe((flight:Flight)=>{
       this.addedFlight=flight;
     },

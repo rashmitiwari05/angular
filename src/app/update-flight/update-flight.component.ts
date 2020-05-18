@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Flight } from '../model/flight';
 import { FlightService } from '../services/flightservice';
+import { Flight } from '../model/flight';
 
 @Component({
   selector: 'app-update-flight',
@@ -8,6 +8,8 @@ import { FlightService } from '../services/flightservice';
   styleUrls: ['./update-flight.component.css']
 })
 export class UpdateFlightComponent implements OnInit {
+
+ 
   updatedFlight:Flight=null;
   service:FlightService;
   
@@ -20,17 +22,29 @@ export class UpdateFlightComponent implements OnInit {
    
   ngOnInit(): void {
   }
-  updateFight(flightForm:any){
+  updateFlight(flightForm:any){
     let details=flightForm.value;
     let flightnumber=details.flightnumber;
     let flightmodel=details.flightmodel;
     let carriername=details.carriername;
     let seatcapacity = details.seatcapacity;
-    let flight=new Flight(flightnumber,flightmodel,carriername,seatcapacity);
-    this.service.updateFlight(flightnumber);
-    this.updatedFlight=flight;
+    
+    this.updatedFlight=new Flight();
+    
+    this.updatedFlight.flightModel=flightmodel;
+    this.updatedFlight.carrierName=carriername;
+    this.updatedFlight.seatCapacity=seatcapacity;
+   let result= this.service.updateFlight(flightnumber);
+    
+    result.subscribe((flight:Flight)=>{
+      
+    },
+    err=>{
+    console.log("err="+err);
+    } );
     flightForm.reset();
 
   }
   
 }
+

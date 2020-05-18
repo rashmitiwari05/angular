@@ -9,33 +9,55 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrls: ['./list-flights.component.css']
 })
 export class ListFlightsComponent implements OnInit {
-  flights:Flight[]=[];
+  flightArr: Flight[]=[];
+  
 
   service:FlightService;
+  
+  router: any;
+  FlightService: any;
 
-  orderByField:string=null;
 
+ 
+  ngOnInit() {
+    
+  }
 
   constructor(service:FlightService) {
   this.service=service;
-  let observable:Observable<Flight[]>=this.service.fetchAllFlights();
+  let observable:Observable<Flight[]>=this.service.fetchAllFlight();
   observable.subscribe(
-    flights=>{
-      this.flights=flights
+    flight=>{
+      this.flightArr=flight;
+      console.log("length :"+this.flightArr.length);
+
      
     },
     err=>console.log(err)
     );
   }
-
-  ngOnInit(): void {
-  }
+  foundStatus=null;
+  
+  /*findFlightById(form:any){
+    let details=form.value;
+    let flightnumber = details.flightnumber;
+    let fetched:Observable<Flight>=this.service.findFlightById(flightnumber);
+    fetched.subscribe(
+      Flight=>{
+        this.foundStatus=Flight;
+        this.foundStatus="found";
+      },
+      err=>{
+        this.foundStatus="notfound";
+        console.log("error while fetching");
+      }
+    );
+  }*/
  
-  orderBy(field:string){
-    this.orderByField=field;     
-  }
  
-  removeFlightById(flightnumber:number){
+  
+ 
+  /*deleteFlightById(flightnumber:number){
     let result:Observable<Flight>=this.service.deleteFlightById(flightnumber);
     result.subscribe(flight=>{
         this.removeLocalFlight(flightnumber);
@@ -43,13 +65,22 @@ export class ListFlightsComponent implements OnInit {
     err=>{
      console.log("err in deleteing flights="+err);
     })
-      }
-
-      removeLocalFlight(flightnumber:number){
+      }*/
+     
+      deleteFlightById(flightNumber:number)
+      {
+     let result:Observable<boolean>=this.service.deleteFlightById(flightNumber);
+     result.subscribe(flight=>{
+         this.removeLocalFlight(flightNumber);
+     },err=>{
+      console.log("err in deleting ="+err);
+     })   
+   } 
+      removeLocalFlight(flightNumber:number){
         let foundIndex=-1;
-        for(let i=0;i<this.flights.length;i++){
-          let flight=this.flights[i];
-          if(flight.flightNumber===flightnumber){
+        for(let i=0;i<this.flightArr.length;i++){
+          let flight=this.flightArr[i];
+          if(flight.flightNumber===flightNumber){
             foundIndex=i;
             break;
           }
@@ -57,6 +88,6 @@ export class ListFlightsComponent implements OnInit {
         if(foundIndex<0){
           return;
         }
-        this.flights.splice(foundIndex,1);
+        this.flightArr.splice(foundIndex,1);
 }
 }

@@ -5,13 +5,14 @@ import { FormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddFlightComponent } from './add-flight/add-flight.component';
-//import { FlightDetailsComponent } from './flight-details/flight-details.component';
-import { UpdateFlightComponent } from './update-flight/update-flight.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FlightService } from './services/flightservice';
 import { ListFlightsComponent } from './list-flights/list-flights.component';
 import { AscendingOrder } from './pipes/ascodered';
-//import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { UpdateFlightComponent } from './update-flight/update-flight.component';
+import { SearchFlightComponent } from './search-flight/search-flight.component';
+
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AscendingOrder } from './pipes/ascodered';
     AddFlightComponent,
     UpdateFlightComponent,
     ListFlightsComponent,
-    AscendingOrder
+    AscendingOrder,
+    SearchFlightComponent
    
    
   ],
